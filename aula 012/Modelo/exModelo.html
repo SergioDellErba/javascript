@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+        }
+        h1 {
+            font-size: 15pt;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>VAMOS CONTAR</h1>
+    <label for="start">Início:</label>
+    <input type="number" id="start" value="1"><br><br>
+
+    <label for="end">Fim:</label>
+    <input type="number" id="end" value="10"><br><br>
+
+    <label for="step">Intervalo:</label>
+    <input type="number" id="step" value="1"><br><br>
+
+    <button id="countButton">Contar</button><br><br>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("countButton").addEventListener("click", function () {
+            var start = parseInt(document.getElementById("start").value);
+            var end = parseInt(document.getElementById("end").value);
+            var step = parseInt(document.getElementById("step").value);
+            var result = "";
+
+            for (var i = start; i <= end; i += step) {
+                result += i + " ";
+            }
+
+            document.getElementById("result").textContent = result;
+        });
+    </script>
+</body>
+</html>

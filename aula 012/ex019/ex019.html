@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-color: navy;
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 5px;
+    width: 50%;
+  }
+  .numbers-area {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Registro de Números</h1>
+  <input type="text" id="inputNumber" placeholder="Digite um número entre 1 e 100" oninput="adicionarNumero()">
+  <div class="numbers-area">
+    <h2>Números Cadastrados</h2>
+    <ul id="numberList"></ul>
+  </div>
+  <br><br>
+  <button onclick="finalizar()">Finalizar</button>
+  <p>Total de números cadastrados: <span id="totalNumbers">0</span></p>
+  <p>Menor valor: <span id="minValue">-</span></p>
+  <p>Maior valor: <span id="maxValue">-</span></p>
+  <p>Soma dos valores: <span id="sumValues">0</span></p>
+  <p>Média dos valores: <span id="avgValue">0</span></p>
+</div>
+
+<script>
+const numbers = [];
+
+function adicionarNumero() {
+  const inputElement = document.getElementById("inputNumber");
+  const numberListElement = document.getElementById("numberList");
+  const inputValue = parseInt(inputElement.value);
+
+  if (isNaN(inputValue) || inputValue < 1 || inputValue > 100) {
+    alert("Número inválido. Insira um valor entre 1 e 100.");
+    inputElement.value = "";
+    return;
+  }
+
+  if (numbers.includes(inputValue)) {
+    alert("Número já cadastrado. Escolha outro valor.");
+    inputElement.value = "";
+    return;
+  }
+
+  numbers.push(inputValue);
+  numberListElement.innerHTML += `<li>${inputValue}</li>`;
+  inputElement.value = "";
+  updateStatistics();
+}
+
+function finalizar() {
+  if (numbers.length === 0) {
+    alert("Precisa digitar algum valor.");
+    return;
+  }
+
+  updateStatistics();
+  numbers.length = 0; // Limpar o array de números
+  document.getElementById("numberList").innerHTML = ""; // Limpar a lista de números
+}
+
+function updateStatistics() {
+  const totalNumbersElement = document.getElementById("totalNumbers");
+  const minValueElement = document.getElementById("minValue");
+  const maxValueElement = document.getElementById("maxValue");
+  const sumValuesElement = document.getElementById("sumValues");
+  const avgValueElement = document.getElementById("avgValue");
+
+  const totalNumbers = numbers.length;
+  const minValue = Math.min(...numbers);
+  const maxValue = Math.max(...numbers);
+  const sumValues = numbers.reduce((acc, num) => acc + num, 0);
+  const avgValue = sumValues / totalNumbers;
+
+  totalNumbersElement.textContent = totalNumbers;
+  minValueElement.textContent = minValue;
+  maxValueElement.textContent = maxValue;
+  sumValuesElement.textContent = sumValues;
+  avgValueElement.textContent = avgValue;
+}
+</script>
+</body>
+</html>

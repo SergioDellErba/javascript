@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerenciador de Números</title>
+</head>
+<body>
+    <input type="text" id="numeroInput" placeholder="Digite um número entre 1 e 100">
+    <button onclick="adicionarNumero()">Adicionar Número</button>
+    <br>
+    <input type="text" id="numerosCadastrados" readonly>
+    <br>
+    <button onclick="finalizar()">Finalizar</button>
+    <br>
+    <p id="resultado"></p>
+
+    <script>
+        let numeros = [];
+
+        function adicionarNumero() {
+            const numeroInput = document.getElementById("numeroInput");
+            const numero = parseInt(numeroInput.value);
+
+            if (isNaN(numero) || numero < 1 || numero > 100) {
+                alert("Número inválido. Digite um número entre 1 e 100.");
+            } else if (numeros.includes(numero)) {
+                alert("Esse número já foi cadastrado.");
+            } else {
+                numeros.push(numero);
+                numeroInput.value = "";
+                document.getElementById("numerosCadastrados").value = numeros.join(", ");
+            }
+        }
+
+        function finalizar() {
+            if (numeros.length === 0) {
+                alert("Precisa digitar algum valor.");
+                return;
+            }
+
+            const totalNumeros = numeros.length;
+            const menorNumero = Math.min(...numeros);
+            const somaNumeros = numeros.reduce((acc, curr) => acc + curr, 0);
+            const mediaNumeros = somaNumeros / totalNumeros;
+
+            document.getElementById("resultado").innerText = `Número total de números cadastrados: ${totalNumeros}\nValor do menor: ${menorNumero}\nSoma de todos os valores: ${somaNumeros}\nMédia de todos os valores: ${mediaNumeros}`;
+        }
+    </script>
+</body>
+</html>

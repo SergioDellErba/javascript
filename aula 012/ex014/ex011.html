@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 15pt;
+        }
+        h1 {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>VOTAÇÃO</h1>
+    <label for="idade">Digite sua idade:</label>
+    <input type="number" id="idade" onchange="verificarIdade()">
+    <p id="mensagem"></p>
+
+    <script>
+        function verificarIdade() {
+            var idade = parseInt(document.getElementById("idade").value);
+            var mensagem = document.getElementById("mensagem");
+
+            if (idade < 16) {
+                mensagem.textContent = "Se idade for menor que dezesseis anos, você não vota.";
+            } else if ((idade >= 16 && idade < 18) || idade > 65) {
+                mensagem.textContent = "Se idade for maior ou igual a dezesseis e menor que dezoito ou maior que 65 anos, você vota opcionalmente.";
+            } else {
+                mensagem.textContent = "Se idade for maior ou igual a dezoito e menor que 65 anos, você vota obrigatoriamente.";
+            }
+        }
+    </script>
+</body>
+</html>

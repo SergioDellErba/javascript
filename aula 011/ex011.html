@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nacionalidade</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 15pt;
+    }
+    #title {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <p id="title">NACIONALIDADE</p>
+  <input type="text" id="countryInput" placeholder="Digite o país">
+  <p id="result"></p>
+
+  <script>
+    const countryInput = document.getElementById("countryInput");
+    const result = document.getElementById("result");
+
+    countryInput.addEventListener("input", () => {
+      const country = countryInput.value.trim();
+
+      if (country.toLowerCase() === "brasil") {
+        result.textContent = `Vivendo em Brasil, você é brasileiro.`;
+      } else {
+        result.textContent = `Vivendo no país ${country}, você é estrangeiro.`;
+      }
+    });
+  </script>
+</body>
+</html>
